@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가위 바위 보</title>
+    <style>
+        #userResult {
+            left: 500px;
+            top: 300px;
+        }
+
+        #userResultImg {
+            left: 500px;
+            top: 200px;
+        }
+
+        #comResult {
+            left: 800px;
+            top: 300px;
+        }
+
+        #comResultImg {
+            left: 800px;
+            top: 200px;
+        }
+
+        #victoryResult {
+            left: 670px;
+            top: 500px;
+            color: green;
+            font-size: 40pt;
+        }
+
+        div {
+            position: absolute;
+            font-size: 25pt;
+        }
+
+        button {
+            position: absolute;
+            top: 400px;
+        }
+    </style>
+</head>
+    <body>
+        <div id="userResult"></div>
+        <div id="userResultImg"></div>
+        <div id="comResult"></div>
+        <div id="comResultImg"></div>
+        <div id="victoryResult"></div>
+        <button onclick=scissors() style="left: 460px;">가위</button>
+        <button onclick=rock() style="left: 520px;">바위</button>
+        <button onclick=paper() style="left: 580px;">보</button>
+
+
+        <script>
+            let com;
+            let user;
+
+            let str = ["가위", "바위", "보"];
+            let imgArrray = ["./images/scissors.png", "./images/rock.png", "./images/paper.png"]
+
+            function random() {
+                com = Math.floor(Math.random() * 3);
+            }
+
+            function scissors() {
+                user = 0;
+                game();
+            }
+            function rock() {
+                user = 1;
+                game();
+            }
+            function paper() {
+                user = 2;
+                game();
+            }
+
+            function game() {
+                if (user == com) {
+                    alert('무승부');
+                    result(com, user, '무승부');
+                } else if ((user + 1) % 3 == com) {
+                    alert('패배');
+                    result(com, user, '패배');
+                } else {
+                    alert('승리');
+                    result(com, user, "승리");
+                }
+                random();
+            }
+
+            function result(com, user, textResult) {
+                for (let i = 0; i < str.length; i++) {
+                    if (com == i) {
+                        document.getElementById("comResult").innerHTML = str[i];
+                        document.getElementById("comResultImg").innerHTML = "<img src='" + imgArrray[i] + "' style='width:100px; height:100px'>";
+                    }
+                    if (user == i) {
+                        document.getElementById("userResult").innerHTML = str[i];
+                        document.getElementById("userResultImg").innerHTML = "<img src='" + imgArrray[i] + "' style='width:100px; height:100px' >";
+                    }
+                }
+                document.getElementById("victoryResult").innerHTML = textResult;
+            }
+        </script>
+    </body>
+</html>
